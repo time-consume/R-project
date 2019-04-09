@@ -1,0 +1,22 @@
+library (ISLR)
+View(Hitters)
+names(Hitters)
+dim(Hitters)
+sum(is.na(Hitters$Salary))
+library(leaps)
+regit.full=regsubsets(Salary~.,Hitters,nvmax = 20)
+reg.summary<-summary(regit.full)
+names(reg.summary)
+reg.summary$rsq
+par(mfrow=c(2,2))
+plot(reg.summary$rss,type = "l")
+plot(reg.summary$adjr2,type = "l")
+which.max(reg.summary$adjr2)
+points(11,reg.summary$adjr2[11],col="red",cex=2,pch=20)
+abline(h=reg.summary$adjr2[11],col=2)
+
+set.seed(1)
+train=sample(c(TRUE,FALSE),nrow(Hitters),rep=TRUE)
+test=(!train)
+regit.best<-regsubsets(Salary~.,data=Hitters,subset=train)
+regit.best

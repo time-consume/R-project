@@ -1,0 +1,12 @@
+library(class)
+library(ISLR)
+dim(Caravan)
+attach(Caravan)
+table(Purchase)
+std<-scale(Caravan[,-86])
+var(std[,1])
+test=c(1:1000)
+train.x<-std[-test,]
+test.x<-std[test,]
+train.y<-Purchase[-test]
+test.y<-Purchase[test]

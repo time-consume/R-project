@@ -1,0 +1,8 @@
+library(ISLR)
+library(boot)
+set.seed(1)
+boot.fn<-function(data,index)return(quantile(data[index],probs = seq(0, 1, 0.25)))
+boot(Auto$horsepower,boot.fn,100)
+max(Auto$horsepower)
+min(Auto$horsepower)
+median((Auto$horsepower))
